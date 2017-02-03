@@ -92,7 +92,11 @@ class TowerOfHanoi
   end
 
   def move_disk(entry)
+    from = entry[0]
+    to = entry[2]
 
+    disk = @rods[from].pop()
+    @rods[to].push(disk)
   end
 
   def win?
