@@ -15,20 +15,18 @@ class TowerOfHanoi
 
   def initialize(disks = 3)
     @disks = disks
-    @rod_one = []
-    @rod_two = []
-    @rod_three = []
+    @rods = { "1" => [], "2" => [], "3" => [] }
   end
 
   def reset_board
-    @rod_one = []
-    @rod_two = []
-    @rod_three = []
+    @rods["1"] = []
+    @rods["2"] = []
+    @rods["3"] = []
 
     i = @disks
 
     @disks.times do
-      @rod_one.push(i)
+      @rods["1"].push(i)
       i -= 1
     end
   end
@@ -41,9 +39,9 @@ class TowerOfHanoi
   end
 
   def render
-    puts @rod_one
-    puts @rod_two
-    puts @rod_three
+    puts @rods["1"]
+    puts @rods["2"]
+    puts @rods["3"]
   end
 
   def new_game
@@ -71,14 +69,17 @@ class TowerOfHanoi
   end
 
   def valid_move?(entry)
+    puts /[1-3,1-3]/.match(entry)
 
+    from = entry[0].to_i
+    to = entry[2].to_i
   end
 
   def invalid_entry
     puts "Please enter a valid input."
   end
 
-  def move_disk(entry)
+  def move_disk(from, to)
 
   end
 
