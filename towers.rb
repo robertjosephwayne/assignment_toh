@@ -67,8 +67,8 @@ class TowerOfHanoi
 
   end
 
-  def invalid_move
-
+  def invalid_entry
+    puts "Please enter a valid input."
   end
 
   def move_disk(entry)
@@ -77,6 +77,21 @@ class TowerOfHanoi
 
   def won?
 
+  end
+
+  def play_again?
+    puts "Would you like to play again?"
+    puts "Enter 'y' to play again or 'q' to quit."
+    entry = gets
+
+    if entry == "q"
+      exit
+    elsif entry == "y"
+      play
+    else
+      invalid_entry
+      play_again?
+    end
   end
 
   def game_over
