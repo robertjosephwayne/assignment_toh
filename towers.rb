@@ -91,7 +91,7 @@ class TowerOfHanoi
   end
 
   def play_again?
-    puts "Would you like to play again?"
+    puts "Congratulations! Would you like to play again?"
     puts "Enter 'y' to play again or 'q' to quit."
     entry = gets.chomp()
 
@@ -105,10 +105,6 @@ class TowerOfHanoi
     end
   end
 
-  def game_over
-
-  end
-
   def play
     new_game
 
@@ -120,5 +116,4 @@ class TowerOfHanoi
     play if play_again?
     exit
   end
-
 end
