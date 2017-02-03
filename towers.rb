@@ -58,9 +58,9 @@ class TowerOfHanoi
       exit
     elsif valid_move?(entry)
       move_disk(entry)
-      game_over if win?
     else
       invalid_entry
+      user_move
     end
   end
 
@@ -79,11 +79,11 @@ class TowerOfHanoi
     if @rods[from][-1] == 0
       puts "No disk in from rod (Rod #{from})"
       return false
-    elsif @rods[to][-1] < @rods[from][-1] && @rods[to][-1] != 0
+    elsif (@rods[to][-1] < @rods[from][-1]) && @rods[to][-1] != 0
       puts "Cannot place larger disk on top of smaller disk (from #{from} to #{to})"
       return false
     else
-      return 1
+      return true
     end
   end
 
@@ -116,10 +116,10 @@ class TowerOfHanoi
     puts "Enter 'y' to play again or 'q' to quit."
     entry = gets
 
-    if entry == "q"
-      exit
-    elsif entry == "y"
-      play
+    if entry.chomp() == "q"
+      return false
+    elsif entry.chomp() == "y"
+      return true
     else
       invalid_entry
       play_again?
@@ -131,23 +131,16 @@ class TowerOfHanoi
   end
 
   def play
+    new_game
 
+    until win?
+      user_move
+      render
+    end
+
+    play if play_again? else exit
   end
 
 end
-
-t = TowerOfHanoi.new(3)
-t.new_game
-
-3.times do
-  t.move_disk("1,3")
-  t.win?
-end
-
-3.times do
-  t.move_disk("3,2")
-  t.win?
-end
-
 
 
