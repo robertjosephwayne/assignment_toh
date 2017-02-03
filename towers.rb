@@ -15,9 +15,9 @@ class TowerOfHanoi
 
   def initialize(disks = 3)
     @disks = disks
-    @tower_one = []
-    @tower_two = []
-    @tower_three = []
+    @rod_one = []
+    @rod_two = []
+    @rod_three = []
   end
 
   def instructions
@@ -31,11 +31,11 @@ class TowerOfHanoi
 
   end
 
-  def new_game
+  def user_move
 
   end
 
-  def set_board
+  def reset_board
 
   end
 
