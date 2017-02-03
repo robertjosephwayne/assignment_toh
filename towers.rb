@@ -14,11 +14,18 @@ class TowerOfHanoi
           # If user won, output congratulations message
         # If input is invalid, ask user to reenter
 
-  def initialize(disks)
+  def initialize(disks = 3)
     @disks = disks
+    @tower_one = []
+    @tower_two = []
+    @tower_three = []
   end
 
   def instructions
+
+  end
+
+  def play
 
   end
 
