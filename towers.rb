@@ -41,7 +41,9 @@ class TowerOfHanoi
   end
 
   def render
-
+    puts @rod_one
+    puts @rod_two
+    puts @rod_three
   end
 
   def user_move
