@@ -15,7 +15,7 @@ class TowerOfHanoi
 
   def initialize(disks = 3)
     @disks = disks
-    @rods = { "1" => [], "2" => [], "3" => [] }
+    @rods = {"1" => [], "2" => [], "3" => []}
   end
 
   def reset_board
@@ -70,7 +70,7 @@ class TowerOfHanoi
 
   def valid_move?(entry)
     unless /[1-3,1-3]/.match(entry)
-      return -1
+      return false
     end
 
     from = entry[0]
@@ -78,10 +78,10 @@ class TowerOfHanoi
 
     if @rods[from][-1] == 0
       puts "No disk in from rod (Rod #{from})"
-      return -1
+      return false
     elsif @rods[to][-1] < @rods[from][-1] && @rods[to][-1] != 0
       puts "Cannot place larger disk on top of smaller disk (from #{from} to #{to})"
-      return -1
+      return false
     else
       return 1
     end
@@ -100,7 +100,15 @@ class TowerOfHanoi
   end
 
   def win?
+    winning_sequence = [0]
 
+    i = @disks
+    @disks.times do
+      winning_sequence.push(i)
+      i -= 1
+    end
+
+    @rods["2"] == winning_sequence || @rods["3"] == winning_sequence ? true : false
   end
 
   def play_again?
@@ -127,4 +135,19 @@ class TowerOfHanoi
   end
 
 end
+
+t = TowerOfHanoi.new(3)
+t.new_game
+
+3.times do
+  t.move_disk("1,3")
+  t.win?
+end
+
+3.times do
+  t.move_disk("3,2")
+  t.win?
+end
+
+
 
