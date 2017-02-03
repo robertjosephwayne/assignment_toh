@@ -47,7 +47,10 @@ class TowerOfHanoi
   end
 
   def user_move
-
+    print "Enter move > "
+    entry = gets
+    quit?(entry)
+    valid_move?(entry) ? move_disk(entry) : invalid_entry
   end
 
   def new_game
@@ -58,15 +61,23 @@ class TowerOfHanoi
 
   end
 
+  def quit?(entry)
+
+  end
+
   def game_over
 
   end
 
-  def valid_move?
+  def valid_move?(entry)
 
   end
 
-  def move_disk(a, b)
+  def invalid_move
+
+  end
+
+  def move_disk(move)
 
   end
 
