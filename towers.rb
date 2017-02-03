@@ -19,9 +19,9 @@ class TowerOfHanoi
   end
 
   def reset_board
-    @rods["1"] = []
-    @rods["2"] = []
-    @rods["3"] = []
+    @rods["1"] = [0]
+    @rods["2"] = [0]
+    @rods["3"] = [0]
 
     i = @disks
 
@@ -39,9 +39,9 @@ class TowerOfHanoi
   end
 
   def render
-    puts @rods["1"]
-    puts @rods["2"]
-    puts @rods["3"]
+    p @rods["1"]
+    p @rods["2"]
+    p @rods["3"]
   end
 
   def new_game
@@ -69,17 +69,29 @@ class TowerOfHanoi
   end
 
   def valid_move?(entry)
-    puts /[1-3,1-3]/.match(entry)
+    unless /[1-3,1-3]/.match(entry)
+      return -1
+    end
 
-    from = entry[0].to_i
-    to = entry[2].to_i
+    from = entry[0]
+    to = entry[2]
+
+    if @rods[from][-1] == 0
+      puts "No disk in from rod (Rod #{from})"
+      return -1
+    elsif @rods[to][-1] < @rods[from][-1] && @rods[to][-1] != 0
+      puts "Cannot place larger disk on top of smaller disk (from #{from} to #{to})"
+      return -1
+    else
+      return 1
+    end
   end
 
   def invalid_entry
     puts "Please enter a valid input."
   end
 
-  def move_disk(from, to)
+  def move_disk(entry)
 
   end
 
@@ -111,5 +123,4 @@ class TowerOfHanoi
   end
 
 end
-
 
