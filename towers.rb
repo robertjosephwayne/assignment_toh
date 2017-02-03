@@ -1,18 +1,4 @@
 class TowerOfHanoi
-  # Display instructions to user
-  # Set up game board
-  # Stack N disks on first rod with largest on bottom
-  # Rod two and three start out with no disks
-  # Render game board
-  # Until user quits or wins:
-  # Request move from user
-  # If input is 'quit', end the game
-  # If input is valid move
-  # Update game board
-  # Render game board
-  # If user won, output congratulations message
-  # If input is invalid, ask user to reenter
-
   def initialize(disks = 3)
     @disks = disks
     @rods = {"1" => [], "2" => [], "3" => []}
@@ -51,8 +37,8 @@ class TowerOfHanoi
   end
 
   def user_move
-    print "Enter move > "
-    entry = gets
+    puts "Enter move: "
+    entry = gets.chomp()
 
     if quit?(entry)
       exit
@@ -69,22 +55,15 @@ class TowerOfHanoi
   end
 
   def valid_move?(entry)
-    unless /[1-3,1-3]/.match(entry)
-      return false
-    end
-
     from = entry[0]
     to = entry[2]
 
-    if @rods[from][-1] == 0
-      puts "No disk in from rod (Rod #{from})"
-      return false
-    elsif (@rods[to][-1] < @rods[from][-1]) && @rods[to][-1] != 0
-      puts "Cannot place larger disk on top of smaller disk (from #{from} to #{to})"
-      return false
-    else
-      return true
-    end
+    return false unless /[1-3,1-3]/.match(entry)
+    return false if from == to
+    return false if @rods[from][-1] == 0
+    return false if (@rods[to][-1] < @rods[from][-1]) && @rods[to][-1] != 0
+
+    true
   end
 
   def invalid_entry
@@ -116,9 +95,9 @@ class TowerOfHanoi
     puts "Enter 'y' to play again or 'q' to quit."
     entry = gets
 
-    if entry.chomp() == "q"
+    if entry == "q"
       return false
-    elsif entry.chomp() == "y"
+    elsif entry == "y"
       return true
     else
       invalid_entry
@@ -142,5 +121,3 @@ class TowerOfHanoi
   end
 
 end
-
-
