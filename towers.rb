@@ -21,9 +21,16 @@ class TowerOfHanoi
   end
 
   def reset_board
-    @rod_one = @disks
+    @rod_one = []
     @rod_two = []
     @rod_three = []
+
+    i = @disks
+
+    @disks.times do
+      @rod_one.push(i)
+      i -= 1
+    end
   end
 
   def instructions
