@@ -60,11 +60,7 @@ class TowerOfHanoi
   end
 
   def quit?(entry)
-
-  end
-
-  def game_over
-
+    entry == "q"
   end
 
   def valid_move?(entry)
@@ -80,6 +76,10 @@ class TowerOfHanoi
   end
 
   def won?
+
+  end
+
+  def game_over
 
   end
 
