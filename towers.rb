@@ -46,19 +46,17 @@ class TowerOfHanoi
     puts @rod_three
   end
 
+  def new_game
+    reset_board
+    instructions
+    render
+  end
+
   def user_move
     print "Enter move > "
     entry = gets
     quit?(entry)
     valid_move?(entry) ? move_disk(entry) : invalid_entry
-  end
-
-  def new_game
-
-  end
-
-  def won?
-
   end
 
   def quit?(entry)
@@ -77,7 +75,11 @@ class TowerOfHanoi
 
   end
 
-  def move_disk(move)
+  def move_disk(entry)
+
+  end
+
+  def won?
 
   end
 
