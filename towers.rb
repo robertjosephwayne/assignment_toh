@@ -20,6 +20,12 @@ class TowerOfHanoi
     @rod_three = []
   end
 
+  def reset_board
+    @rod_one = @disks
+    @rod_two = []
+    @rod_three = []
+  end
+
   def instructions
     puts "Welcome to Tower of Hanoi!"
     puts "Instructions:"
@@ -27,7 +33,7 @@ class TowerOfHanoi
     puts "in the format '1,3'. Enter 'q' to quit."
   end
 
-  def play
+  def render
 
   end
 
@@ -35,11 +41,7 @@ class TowerOfHanoi
 
   end
 
-  def reset_board
-
-  end
-
-  def render
+  def new_game
 
   end
 
@@ -59,5 +61,10 @@ class TowerOfHanoi
 
   end
 
+  def play
+
+  end
+
 end
+
 
