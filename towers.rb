@@ -1,33 +1,24 @@
 class TowerOfHanoi
   def initialize(disks = 3)
     @disks = disks
-    @rods = {"1" => [], "2" => [], "3" => []}
+    @rods = [[], [], []]
   end
 
   def reset_board
-    @rods["1"] = [0]
-    @rods["2"] = [0]
-    @rods["3"] = [0]
+    @rods[0] = []
+    @rods[1] = []
+    @rods[2] = []
 
-    i = @disks
-
-    @disks.times do
-      @rods["1"].push(i)
-      i -= 1
+    @disks.downto(1) do |i|
+      @rods[0].push(i)
     end
   end
 
   def instructions
-    puts "Welcome to Tower of Hanoi!"
-    puts "Instructions:"
+    puts "\nWelcome to Tower of Hanoi!\n\n"
+    puts "Instructions:\n\n"
     puts "Enter where you'd like to move from and to"
     puts "in the format '1,3'. Enter 'q' to quit."
-  end
-
-  def render
-    p @rods["1"]
-    p @rods["2"]
-    p @rods["3"]
   end
 
   def new_game
@@ -37,7 +28,7 @@ class TowerOfHanoi
   end
 
   def user_move
-    puts "Enter move: "
+    print "Enter move: "
     entry = gets.chomp()
 
     if quit?(entry)
@@ -55,13 +46,16 @@ class TowerOfHanoi
   end
 
   def valid_move?(entry)
-    from = entry[0]
-    to = entry[2]
+    from = entry[0].to_i - 1
+    to = entry[2].to_i - 1
 
     return false unless /[1-3,1-3]/.match(entry)
     return false if from == to
-    return false if @rods[from][-1] == 0
-    return false if (@rods[to][-1] < @rods[from][-1]) && @rods[to][-1] != 0
+    return false if @rods[from] == []
+
+    if @rods[to] != []
+      return false if @rods[to][-1] < @rods[from][-1]
+    end
 
     true
   end
@@ -71,23 +65,21 @@ class TowerOfHanoi
   end
 
   def move_disk(entry)
-    from = entry[0]
-    to = entry[2]
+    from = entry[0].to_i - 1
+    to = entry[2].to_i - 1
 
     disk = @rods[from].pop()
     @rods[to].push(disk)
   end
 
   def win?
-    winning_sequence = [0]
+    winning_sequence = []
 
-    i = @disks
-    @disks.times do
+    @disks.downto(1) do |i|
       winning_sequence.push(i)
-      i -= 1
     end
 
-    @rods["2"] == winning_sequence || @rods["3"] == winning_sequence ? true : false
+    @rods[1] == winning_sequence || @rods[2] == winning_sequence ? true : false
   end
 
   def play_again?
@@ -113,7 +105,62 @@ class TowerOfHanoi
       render
     end
 
-    play if play_again?
-    exit
+    play_again? ? play : exit
   end
+
+  #### Render methods
+
+  def render_margin(margin)
+    print " " * margin
+  end
+
+  def render_base(line_width, margin)
+    dash_padding = (line_width - 3) / 2
+    board_length = line_width * 3 + margin * 2
+
+    puts "-" * board_length
+
+    1.upto(3) do |i|
+      print "-" * dash_padding
+      print " #{i} "
+      print "-" * dash_padding
+      print " " * margin unless i == 3
+      puts if i == 3
+    end
+
+    puts "-" * board_length
+    puts
+  end
+
+  def render_disk(line_width, disk_width)
+    padding = (line_width - disk_width) / 2
+    print " " * padding
+    disk_width == 0 ? print(" ") : print("0" * disk_width)
+    print " " * padding
+  end
+
+  def render
+    line_width = 7 + (@disks - 3) * 2
+    margin = 3
+
+    @disks.downto(0) do |row|
+      3.times do |rod|
+        if @rods[rod][row]
+          disk_width = 1 + (@rods[rod][row] - 1) * 2
+        else
+          disk_width = 0
+        end
+
+        render_disk(line_width, disk_width)
+        render_margin(margin)
+        puts if rod == 2
+      end
+    end
+
+    render_base(line_width, margin)
+  end
+
 end
+
+t = TowerOfHanoi.new(3)
+t.play
