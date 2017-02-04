@@ -28,7 +28,7 @@ class TowerOfHanoi
   end
 
   def user_move
-    puts "Enter move: "
+    print "Enter move: "
     entry = gets.chomp()
 
     if quit?(entry)
@@ -140,7 +140,7 @@ class TowerOfHanoi
   end
 
   def render
-    line_width = 5 + (@disks - 3) * 2
+    line_width = 7 + (@disks - 3) * 2
     margin = 3 + (@disks - 3)
 
     @disks.downto(0) do |row|
@@ -161,3 +161,6 @@ class TowerOfHanoi
   end
 
 end
+
+t = TowerOfHanoi.new(3)
+t.play
